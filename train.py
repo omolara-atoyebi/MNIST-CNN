@@ -55,10 +55,11 @@ for epoch in range(epochs):
         accuracy1 = running_accuracies/len(testloader)
         test_losses.append(tes_loss)
         accuracies.append(accuracy1)
-        print(f" Loss: {tr_loss:.4f}  test_loss:  {tst_loss:.4f}   accuracy: {accuracy *100: .2f}")
+        print(f" Loss: {tr_loss:.4f}  test_loss:  {tst_loss:.4f}   accuracy: {accuracy1 *100: .2f}")
     if   accuracy1 > previous_accuracy:
         
-        torch.save(model.state_dict(), 'model.pth')
+        torch.save(model.state_dict(), f'model_{accuracy1:.2f}.pth')
+
         previous_accuracy = accuracy1
 
     model.train()
