@@ -82,20 +82,16 @@ def view_classify_general(img, ps, class_list):
 
 
 
-imag = cv2.imread('handwritten_img.png')
+imag = cv2.imread('handwritten_img2.png')
 image = cv2.cvtColor(imag,cv2.COLOR_BGR2GRAY)
 
 convert_tensor = transforms.ToTensor()
 img = convert_tensor(image)
-# print(img.shape)
 
-#print(img.unsqueeze(0).shape)
-#img=img.view(image[0].shape[0],-1)
-#logits = model(img.unsqueeze(0))
 logits = model(torch.unsqueeze(img,axis=0).float())
-# Calculate the loss with the logits and the labels
+
 ps = F.softmax(logits, dim=1)
-#ps = torch.exp(logits, dim = 1)
+
 view_classify_general(img, ps, class_list= [0,1,2,3,4,5,6,7,8,9])
 
         
